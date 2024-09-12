@@ -1,0 +1,56 @@
+/* General body styles for dark mode */
+body {
+    background-color: #121212; /* Almost black background */
+    color: #ffffff; /* White text color for contrast */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container for canvas and slider */
+#canvasContainer {
+    margin-bottom: 20px;
+}
+
+/* Styles for the slider container */
+.slider-container {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Styles for the slider */
+.slider {
+    width: 300px;
+    margin: 0 15px;
+}
+
+/* Styles for the slider value input box */
+.slider-value {
+    width: 60px;
+    text-align: center;
+    background-color: #333333; /* Dark gray input background */
+    border: 1px solid #888888; /* Light gray border */
+    color: #ffffff; /* White text color */
+}
+
+/* Input number field style */
+input[type="number"] {
+    background-color: #333333;
+    border: 1px solid #888888;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Canvas styles */
+canvas {
+    background-color: #1e1e1e; /* Dark canvas background */
+    display: block;
+    margin: 20px 0;
+    border: 1px solid #888888; /* Optional border for canvas */
+}

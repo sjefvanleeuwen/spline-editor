@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spline Editor with dat.GUI</title>
+    <style>
+        body {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Create two Spline Editor Components -->
+<spline-editor id="splineEditor1" width="300" height="150" controlpointcolor="#ff9800" fixedpointcolor="#03a9f4" linecolor="#ffffff"></spline-editor>
+<spline-editor id="splineEditor2" width="600" height="600" controlpointcolor="#ff9800" fixedpointcolor="#03a9f4" linecolor="#ffffff"></spline-editor>
+
+<!-- Include dat.GUI library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
+<script type="module" src="./component.js"></script>
+
+<script>
+    // Array to hold the spline editors
+    const splineEditors = [
+        document.getElementById('splineEditor1'),
+        document.getElementById('splineEditor2')
+    ];
+
+    // Create a dat.GUI instance
+    const gui = new dat.GUI();
+
+    // Loop over each spline editor to create controls for each one
+    splineEditors.forEach((editor, index) => {
+        const editorFolder = gui.addFolder(`Spline Editor ${index + 1}`);
+
+        // Object to hold the GUI controls for this spline editor
+        const settings = {
+            markerPosition: 0,  // Starting marker position (0-1)
+            interpolationMode: true,  // True for Catmull-Rom, False for Linear
+            controlPointColor: editor.getAttribute('controlpointcolor'),
+            fixedPointColor: editor.getAttribute('fixedpointcolor'),
+            lineColor: editor.getAttribute('linecolor'),
+            updateMarker: function(value) { editor.updateMarkerPosition(value); }  // Function to update marker position
+        };
+
+        // Add marker position slider (0-100 range) and link to spline editor
+        editorFolder.add(settings, 'markerPosition', 0, 1).step(0.01).onChange((value) => {
+            settings.updateMarker(value);  // Update marker position in spline editor
+        });
+
+        // Add toggle checkbox for interpolation mode
+        editorFolder.add(settings, 'interpolationMode').name('Catmull-Rom').onChange((value) => {
+            editor.toggleInterpolation(value);  // Toggle interpolation mode in spline editor
+        });
+
+        // Add color pickers for control points and line color
+        editorFolder.addColor(settings, 'controlPointColor').onChange((value) => {
+            editor.setAttribute('controlpointcolor', value);  // Update control point color
+        });
+
+        editorFolder.addColor(settings, 'fixedPointColor').onChange((value) => {
+            editor.setAttribute('fixedpointcolor', value);  // Update fixed point color
+        });
+
+        editorFolder.addColor(settings, 'lineColor').onChange((value) => {
+            editor.setAttribute('linecolor', value);  // Update line color
+        });
+
+        // Open the folder for each editor by default
+        editorFolder.open();
+    });
+
+</script>
+
+</body>
+</html>
