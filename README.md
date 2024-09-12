@@ -3,6 +3,8 @@
 
 A custom HTML element-based spline editor for creating and managing animation splines. This tool uses the Web Components standard to offer a reusable, encapsulated graphical interface for defining and manipulating spline curves through a browser.
 
+![splint-edior](./doc/spline-editor.gif)
+
 ## Features
 
 - **Create Splines**: Click on the graph to add control points.
